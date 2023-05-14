@@ -51,7 +51,7 @@ void User::login(string type)
 
 	if (t.id != 0 || t.password != "admin") //reuglar user login
 	{
-		for (auto i = user_list.begin(); i < user_list.end(); i++)//checking input id from regestered ids
+		for (auto i = user_list.begin(); i != user_list.end(); i++)//checking input id from regestered ids
 		{
 			User u = *i;
 			if (u.id == t.id && u.password == t.password && u.type == type)//id found and it's of the same type of the user
@@ -213,7 +213,7 @@ void User::forgetpass()
 		cout << "enter your user id \n";
 		cin >> w.id;
 
-		for (auto j = user_list.begin(); j < user_list.end(); j++)
+		for (auto j = user_list.begin(); j != user_list.end(); j++)
 		{
 			User u = *j;
 

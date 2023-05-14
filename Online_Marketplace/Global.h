@@ -17,7 +17,7 @@ inline fstream productFile;
 inline int autoid;
 
 //list of users
-inline vector<User> user_list;
+inline list<User> user_list;
 
 inline User* current_user;
 
