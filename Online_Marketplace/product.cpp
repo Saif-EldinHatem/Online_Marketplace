@@ -3,9 +3,11 @@
 #include "User.h"
 #include "Global.h"
 #include <fstream>
+#include "RatingSys.h"
 
 using namespace std;
 
+RatingSys syss;
 
 //construct
 product::product()
@@ -46,7 +48,7 @@ void product::productMenu()
             cout << "2) Remove product from stock\n";
             cout << "Enter the choice:\n";
             cin >> choice;
-        
+
             if (choice == 1)
             {
                 int qun;
@@ -54,14 +56,14 @@ void product::productMenu()
                 cin >> nameToRemove;
                 cout << "enter the quantity you want to remove from stock: \n";
                 cin >> qun;
-                removeProduct(nameToRemove , qun);
+                removeProduct(nameToRemove, qun);
             }
-            else if (choice == 2){
+            else if (choice == 2) {
                 cout << "Enter product name you want to remove:\n";
                 cin >> nameToRemove;
                 removeProduct(nameToRemove);
             }
-            else 
+            else
                 "invalid choice";
             break;
         case 5:
@@ -75,25 +77,25 @@ void product::productMenu()
 void product::addProduct()
 {
     product newProduct;
-    
+
     cout << "Enter product ID: ";
     cin >> newProduct.id;
-    
+
     cout << "Enter product name: ";
     cin >> newProduct.name;
-    
+
     cout << "Enter product price: ";
     cin >> newProduct.price;
-    
+
     cout << "Enter product quantity: ";
     cin >> newProduct.quantity;
 
-    do{
+    do {
         string choice;
         cout << "Available Categories: 1)Phones\t2)Electronics\t3)Fashion\t4)Others" << endl;
         cout << "Enter product category: ";
         cin >> choice;
-        
+
         if (choice == "1")
             newProduct.category = "Phones";
         else if (choice == "2")
@@ -104,18 +106,19 @@ void product::addProduct()
             newProduct.category = "Others";
         else
             continue;
-        
+
         break;
     } while (true);
 
     newProduct.sellerId = current_user->id;
-    stock[newProduct.name] = newProduct; 
 
-    system("cls");
+    stock[newProduct.name] = newProduct;
+
+    system("cls"); //clear screan
     cout << "\t\t\t\tProduct added successfully!" << endl;
 }
 
-void product::viewproduct()
+void product::viewproduct() //view products
 {
     system("cls");
     cout << "Product ID\tProduct Name\tProduct Price\tProduct Category\tProduct Quantity\tSeller ID" << endl;
@@ -218,11 +221,13 @@ void product::removeProduct(string ProductName)
 void product::removeProduct(string ProductName, int c)
 {
 
-    auto it = stock.find(ProductName);
+    auto it = stock.find(ProductName); // auto takes any data type
     if (it != stock.end() && (it->second.sellerId == current_user->id || current_user->type == "customer")) { //product found in stock and it's either the seller who owns this product or the buyer trying to access it
         if (c <= it->second.quantity)
         {
             it->second.quantity -= c;
+
+
         }
         else
         {
@@ -237,60 +242,135 @@ void product::removeProduct(string ProductName, int c)
         cout << "\t\t\t\tProduct with name " << ProductName << " was not found." << std::endl;
     }
 }
-   
+
 
 //Customer methods
 
-void product::categories()
+void product::make_categories()
 {
 
-    string name;
+    //    string name;
     User u;
-    phones.clear();
-    electronics.clear();
-    fashion.clear();
-    others.clear();
-    //check here!
+
+    //we first clear category lists so it doesn't duplicate data 
+    category_vector[0].clear();
+    category_vector[1].clear();
+    category_vector[2].clear();
+    category_vector[3].clear();
+
     for (auto it = stock.begin(); it != stock.end(); ++it) {
 
         //phones
         if (it->second.category == "Phones") {
-            phones.push_back(&it->second);
+            category_vector[0].push_back(&it->second);
 
         }
         //Electronics
         else if (it->second.category == "Electronics") {
-            electronics.push_back(&it->second);
+            category_vector[1].push_back(&it->second);
         }
         //Fashion
         else if (it->second.category == "Fashion") {
-            fashion.push_back(&it->second);
+            category_vector[2].push_back(&it->second);
         }
         else {
-            others.push_back(&it->second);
+            category_vector[3].push_back(&it->second);
         }
 
     }
 
-    cout << "[Phones]:" << endl;
-    for (int i = 0; i < phones.size(); i++) {
-        cout << phones[i]->name << endl;
-    }
+    // cout << "[Phones]:" << endl;
+    // for (int i = 0; i < phones.size(); i++) {
+    //     cout << phones[i]->name << endl;
+    // }
 
-    cout << endl << endl << endl << "[Electroins]:" << endl;
-    for (int i = 0; i < electronics.size(); i++) {
-        cout << electronics[i]->name << endl;
-    }
-    cout << endl << endl << endl << "[Fashion]:" << endl;
-    for (int i = 0; i < fashion.size(); i++) {
-        cout << fashion[i]->name << endl;
-    }
-    cout << endl << endl << endl << "[Others]:" << endl;
-    for (int i = 0; i < others.size(); i++) {
-        cout << others[i]->name << endl;
-    }
-   cout <<"\n\n\nplease enter the product name from above:\n";
-    cin >> name;
-    u.search(name);
-    
+    // cout << endl << endl << endl << "[Electroins]:" << endl;
+    // for (int i = 0; i < electronics.size(); i++) {
+    //     cout << electronics[i]->name << endl;
+    // }
+    // cout << endl << endl << endl << "[Fashion]:" << endl;
+    // for (int i = 0; i < fashion.size(); i++) {
+    //     cout << fashion[i]->name << endl;
+    // }
+    // cout << endl << endl << endl << "[Others]:" << endl;
+    // for (int i = 0; i < others.size(); i++) {
+    //     cout << others[i]->name << endl;
+    // }
+
+
 }
+
+void product::show_category()
+{
+    string choice;
+    int index;
+    do {
+        cout << "Available Categories: 1)Phones\t2)Electronics\t3)Fashion\t4)Others\t0) Main Menu" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        system("cls");
+        if (choice == "1") {
+            cout << "Phones:\n";
+            index = 0;
+        }
+        else if (choice == "2") {
+            cout << "Electronics:\n";
+            index = 1;
+        }
+        else if (choice == "3") {
+            cout << "Fashion:\n";
+            index = 2;
+        }
+        else if (choice == "4") {
+            cout << "Others:\n";
+            index = 3;
+        }
+        else if (choice == "0") {
+            return;
+        }
+        else
+            continue;
+
+        for (int i = 0; i < category_vector[index].size(); i++) {
+            cout << i + 1 << ") Name: " << category_vector[index][i]->name << "\tAverage Rate: " << category_vector[index][i]->avg_rate << "\t\ttPrice: " << category_vector[index][i]->price << endl;
+        }
+        cout << "\t\t\t\t--------------------------------------------------------" << endl;
+        cout << "choose product from above:\n(press 0 to Sort by Avg. Customer Review)\n\n";
+        int answer;
+        cin >> answer;
+        system("cls");
+        if (answer == 0) { // if answer is not a number of a product (0) then sort
+            cout << "1) Asscending\n2) Descending\n";
+            cin >> answer;
+            system("cls");
+            if (answer == 1) {
+                syss.sorAsc(index);
+                show_category();
+                return;
+            }
+            else if (answer == 2) {
+                syss.sorDesc(index);
+                show_category();
+                return;
+            }
+            else {
+                cout << "Enter a valid choice!" << endl;
+                continue;
+            }
+        }
+        answer--; // making it zero indexed.
+        if (answer >= category_vector[index].size() || answer < 0) {
+            cout << "Enter a valid number" << endl;
+            continue;
+        }
+        else {
+            User u;
+            u.search(category_vector[index][answer]->name);
+        }
+
+        break;
+    } while (true);
+}
+
+
+

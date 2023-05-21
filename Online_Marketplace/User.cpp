@@ -3,38 +3,41 @@
 #include <fstream>
 #include <vector>
 #include "Global.h"
+#include "RatingSys.h"
 
 using namespace std;
+RatingSys sys;
 
 void User::regestir(string type)
 {
-		User s;
-		system("cls");
+	User s;
+	system("cls");
 
-		cout << "Enter your name:";
-		cin >> s.name;
-		cout << endl;
-		cout << "Enter your email:";
-		cin >> s.email;
-		cout << endl;
-		cout << "Enter your phone number:";
-		cin >> s.phone;
-		cout << endl;
-		cout << "Enter password:";
-		cin >> s.password;
-		cout << endl;
-		s.id = autoid;
-		//setting user type.
-		s.type = type;
+	cout << "Enter your name:";
+	cin >> s.name;
+	cout << endl;
+	cout << "Enter your email:";
+	cin >> s.email;
+	cout << endl;
+	cout << "Enter your phone number:";
+	cin >> s.phone;
+	cout << endl;
+	cout << "Enter password:";
+	cin >> s.password;
+	cout << endl;
+	s.id = autoid;
+	//setting user type.
+	s.type = type;
 
-		system("cls");
-		cout << "\t\t\t\t   Registraton succesful. congratulations!\n";
-		cout << "\t\t\t\t\t\t Your ID is: " << autoid << "\n\n";
-		user_list.push_back(s);
+	system("cls");
+	cout << "\t\t\t\t   Registraton succesful. congratulations!\n";
+	cout << "\t\t\t\t\t\t Your ID is: " << autoid << "\n\n";
 
-		autoid++;
+	user_list.push_back(s);
 
-		return;
+	autoid++;
+
+	return;
 }
 
 void User::login(string type)
@@ -57,7 +60,7 @@ void User::login(string type)
 			if (u.id == t.id && u.password == t.password && u.type == type)//id found and it's of the same type of the user
 			{
 				current_user = &(*i);
-				cout << "\t\t\t\t" << u.name << ": you logged in succesfully\n";
+				cout << "\t\t\t\t" << u.name << ", you logged in succesfully\n";
 				if (u.type == "seller") {
 					product p;
 					p.productMenu();
@@ -91,7 +94,7 @@ void User::admin()
 {
 	int choice4, choice;
 	char answer;
-	
+
 	system("cls");
 	cout << "press 1 to search for id\n\n";
 	cout << "press 2 to go back to main menu\n\n";
@@ -101,25 +104,25 @@ void User::admin()
 	if (choice == 1)
 	{
 		cout << "All regestered ID's: \n";
-		
+
 		for (auto it = user_list.begin(); it != user_list.end(); ++it) {
 			cout << "ID: " << it->id + 1 << "\t Type: " << it->type << endl;
 		}
 
 		cout << "\t\t------Choose the user you want from above(Or 0 to quit)------\n\n";
 		cin >> choice4;
-		
+
 		if (choice4 == 0) {
 			return;
 		}
-		
+
 		User u;
 
 		for (auto j = user_list.begin(); j != user_list.end(); j++)
 		{
 			u = *j;
 
-			if (u.id == choice4 - 1)//id found
+			if (u.id == choice4 - 1)
 			{
 				cout << endl;
 				u.showpersonaldata(&u);
@@ -179,7 +182,7 @@ void User::info(string type)
 		system("cls");
 		cout << "\t\tplease enter choice from above choices." << endl;
 		info(type); // there might be an error.
-		
+
 	}
 }
 
@@ -254,6 +257,9 @@ void User::buyerMenu()
 	string name;
 	product p;
 
+	// we devide categories once the buyer logs in.
+	p.make_categories();
+
 	while (true) {
 		cout << endl << "\t\t-----------------------------------------------------------------------" << endl;
 		cout << "1. Search by name\n2. Categories\n3. View Cart\n4. Log out" << endl;
@@ -268,13 +274,12 @@ void User::buyerMenu()
 			search(name);
 			break;
 		case 2:
-			p.categories();
+			p.show_category();
 			break;
 		case 3:
 			cartMenu();
 			break;
 		case 4:
-			current_user->cart.clear();
 			return;
 			break;
 		default:
@@ -282,7 +287,6 @@ void User::buyerMenu()
 		}
 	}
 }
-
 
 void User::cartMenu()
 {
@@ -318,7 +322,7 @@ void User::cartMenu()
 				break;
 			}
 
-			updateCart(index-1);
+			updateCart(index - 1);
 			break;
 		case 2:
 			printCart();
@@ -330,7 +334,7 @@ void User::cartMenu()
 				break;
 			}
 
-			removeFromCart(index-1);
+			removeFromCart(index - 1);
 			break;
 		case 3:
 			current_user->cart.clear();
@@ -352,6 +356,7 @@ void User::addToCart(product item)
 	int cart_Item_ID = -1;
 	product prdct;
 
+
 	// check if item already exists in cart
 	for (int i = 0; i < current_user->cart.size(); i++) {
 		if (current_user->cart[i].id == item.id) {
@@ -369,14 +374,14 @@ void User::addToCart(product item)
 	if (amount == 0) {
 		return;
 	}
-	
+
 	//if item already exists sum new quantity to its already existing amount.
 	if (cart_Item_ID != -1) {
 		amount += current_user->cart[cart_Item_ID].quantity;
 	}
 
 	//check if entered quantity bigger than quantity in stock.
-	if (amount > item.quantity){
+	if (amount > item.quantity) {
 		cout << "\t\t\t\tNot enough quantity in stock." << endl;
 		return;
 	}
@@ -397,8 +402,8 @@ void User::addToCart(product item)
 
 
 	cout << "Item added to cart" << endl
-	     << "1)Confirm buying" << endl
-		 << "2)Continue shopping.." << endl;
+		<< "1)Confirm buying" << endl
+		<< "2)Continue shopping.." << endl;
 	cin >> choice;
 	system("cls");
 
@@ -415,15 +420,14 @@ void User::addToCart(product item)
 
 void User::removeFromCart(int index)
 {
-		current_user->cart.erase(current_user->cart.begin() + index);
+	current_user->cart.erase(current_user->cart.begin() + index);
 }
-
 
 void User::updateCart(int index)
 {
 	int count;
 	cout << "Item quantity in cart: " << current_user->cart[index].quantity << endl;
-	
+
 	auto it = stock.find(current_user->cart[index].name);
 	if (it != stock.end()) {
 		cout << "Enter amount you want to update (from 0 to " << it->second.quantity << "): " << endl;
@@ -462,7 +466,7 @@ void User::confirmBuying()
 	system("cls");
 
 	if (answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes") {
-
+		//removes from stock
 		for (int i = 0; i < current_user->cart.size(); i++)
 		{
 			p.removeProduct(current_user->cart[i].name, current_user->cart[i].quantity);
@@ -504,13 +508,17 @@ void User::search(string name)
 		cout << "Seller ID: " << it->second.sellerId << endl;
 
 		cout << endl << endl;
-		
-		cout << "press 1 to add to cart\npress 2 to continue\n ";
+
+		cout << "1) Add to cart\n2) Rate product\n3) continue shopping\n ";
 		cin >> choice;
 		system("cls");
 		if (choice == "1")
 		{
 			addToCart(it->second);
+		}
+		else if (choice == "2") {
+			addRating(&it->second);
+			sys.avg_ratings(&it->second);
 		}
 		else
 			return;
@@ -518,8 +526,25 @@ void User::search(string name)
 	else
 		cout << "Product Not Found!" << endl;
 
-	
-
 
 }
 
+void User::addRating(product* prdct)
+{
+	float rating;
+
+	while (true) {
+
+		cout << "Enter rating for product '" << prdct->name << "' (out of 5): ";
+		cin >> rating;
+
+		if (rating >= 0 && rating <= 5) {
+			prdct->ratings.push_back(rating);
+			break;
+		}
+		else {
+			cout << "Invalid rate, try again!" << endl;
+		}
+
+	}
+}

@@ -1,7 +1,7 @@
 #pragma once
 #include <fstream>
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 class product
@@ -13,12 +13,13 @@ public:
     double price;
     int sellerId;
     int quantity;
-
+    vector <float> ratings;
+    float avg_rate = 0;
     //construct
     product();
 
     //Methods
-    
+
     //for seller
 
     void productMenu();
@@ -27,5 +28,8 @@ public:
     void updateProduct();
     void removeProduct(string ProductName);
     void removeProduct(string ProductName, int c);
-    void categories();
+    void make_categories();
+    void show_category();
 };
+
+

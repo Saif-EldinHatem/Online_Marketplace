@@ -1,0 +1,35 @@
+[
+    {
+        "address": "address",
+        "cart": null,
+        "email": "0",
+        "id": 0,
+        "name": "0",
+        "password": "0",
+        "phone": 0,
+        "total": 0.0,
+        "type": "seller"
+    },
+    {
+        "address": "address",
+        "cart": [
+            {
+                "avg_rate": 0.0,
+                "category": "Electronics",
+                "id": 2,
+                "name": "2",
+                "price": 2.0,
+                "quantity": 1,
+                "ratings": [],
+                "sellerId": 0
+            }
+        ],
+        "email": "1",
+        "id": 1,
+        "name": "1",
+        "password": "1",
+        "phone": 1,
+        "total": 2.0,
+        "type": "customer"
+    }
+]

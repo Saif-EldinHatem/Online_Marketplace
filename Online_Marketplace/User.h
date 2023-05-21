@@ -16,10 +16,10 @@ public:
 	string type;
     string address = "address";//for customer only
 	int phone;
-
 	//cart related
-	double total =0 ;
-	vector<product> cart;
+	vector<product> cart; 
+	double total = 0;
+
 
 	void login(string type);
 	void admin();
@@ -27,7 +27,9 @@ public:
 	void showpersonaldata(User* u);
 	void regestir(string type);
 	void forgetpass();
-    //customer only
+
+    //customer only methods
+
     void buyerMenu();
     void cartMenu();
     void addToCart(product item);
@@ -37,6 +39,8 @@ public:
     void printCart();
     void search(string name);
 
-};
 
+	//rating system
+	void addRating(product* prdct);
+};
 

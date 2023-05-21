@@ -8,8 +8,8 @@
 using namespace std;
 
 //file paths
-inline string useerfile_Path = "Data/users.bin";
-inline string productFile_Path = "Data/stock.bin";
+inline string useerfile_Path = "Data/users.json";
+inline string productFile_Path = "Data/stock.json";
 inline fstream useerfile;
 inline fstream productFile;
 
@@ -25,10 +25,6 @@ inline User* current_user;
 inline unordered_map<string, product> stock;
 
 //category lists
-inline vector <product*> phones;
-inline vector <product*> electronics;
-inline vector <product*> fashion;
-inline vector <product*> others;
-
+inline vector< vector <product*> >category_vector;
 
 

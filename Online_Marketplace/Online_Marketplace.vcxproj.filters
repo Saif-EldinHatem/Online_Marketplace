@@ -24,6 +24,9 @@
     <ClCompile Include="product.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RatingSys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -35,5 +38,11 @@
     <ClInclude Include="product.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RatingSys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

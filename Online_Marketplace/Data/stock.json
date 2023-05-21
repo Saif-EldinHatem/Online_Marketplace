@@ -1,0 +1,35 @@
+[
+    {
+        "avg_rate": 0.0,
+        "category": "Phones",
+        "id": 1,
+        "name": "1",
+        "price": 1.0,
+        "quantity": 1,
+        "ratings": [],
+        "sellerId": 0
+    },
+    {
+        "avg_rate": 4.0,
+        "category": "Electronics",
+        "id": 2,
+        "name": "2",
+        "price": 2.0,
+        "quantity": 2,
+        "ratings": [
+            3.0,
+            5.0
+        ],
+        "sellerId": 0
+    },
+    {
+        "avg_rate": 0.0,
+        "category": "Fashion",
+        "id": 3,
+        "name": "3",
+        "price": 3.0,
+        "quantity": 3,
+        "ratings": [],
+        "sellerId": 0
+    }
+]
