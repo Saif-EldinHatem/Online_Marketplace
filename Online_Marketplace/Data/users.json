@@ -2,34 +2,78 @@
     {
         "address": "address",
         "cart": null,
-        "email": "0",
+        "email": "bahaa@gmail.com",
         "id": 0,
-        "name": "0",
-        "password": "0",
-        "phone": 0,
+        "name": "bahaa",
+        "password": "root",
+        "phone": 1015487817,
         "total": 0.0,
         "type": "seller"
     },
     {
         "address": "address",
-        "cart": [
-            {
-                "avg_rate": 0.0,
-                "category": "Electronics",
-                "id": 2,
-                "name": "2",
-                "price": 2.0,
-                "quantity": 1,
-                "ratings": [],
-                "sellerId": 0
-            }
-        ],
-        "email": "1",
+        "cart": null,
+        "email": "ahmed@gmail.com",
         "id": 1,
-        "name": "1",
-        "password": "1",
-        "phone": 1,
-        "total": 2.0,
+        "name": "ahmed",
+        "password": "kali",
+        "phone": 1033814538,
+        "total": 0.0,
+        "type": "seller"
+    },
+    {
+        "address": "address",
+        "cart": null,
+        "email": "stephwilliam@yahoo.com",
+        "id": 2,
+        "name": "steph",
+        "password": "stephen",
+        "phone": 1592049302,
+        "total": 0.0,
+        "type": "seller"
+    },
+    {
+        "address": "address",
+        "cart": null,
+        "email": "jamaica123@hotmail.com",
+        "id": 3,
+        "name": "jamaica",
+        "password": "othman",
+        "phone": 1234605050,
+        "total": 120000.0,
+        "type": "customer"
+    },
+    {
+        "address": "address",
+        "cart": null,
+        "email": "ehaba7@yahoo.com",
+        "id": 4,
+        "name": "ehab",
+        "password": "hub",
+        "phone": 1030204492,
+        "total": 0.0,
+        "type": "customer"
+    },
+    {
+        "address": "address",
+        "cart": null,
+        "email": "saifhatem76@gmail.com",
+        "id": 5,
+        "name": "Saif",
+        "password": "2252",
+        "phone": 1092312669,
+        "total": 0.0,
+        "type": "customer"
+    },
+    {
+        "address": "address",
+        "cart": null,
+        "email": "ahmed@yahoo.com",
+        "id": 6,
+        "name": "ahmed",
+        "password": "ahmed",
+        "phone": 123,
+        "total": 0.0,
         "type": "customer"
     }
 ]

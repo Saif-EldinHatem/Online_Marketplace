@@ -39,12 +39,12 @@ int main()
 
 		if (choice1 == 1)
 		{
-			u1.info("customer");
+			u1.selector_page("customer");
 			//	system("cls");
 		}
 		else if (choice1 == 2)
 		{
-			u1.info("seller");
+			u1.selector_page("seller");
 			//	system("cls");
 		}
 		else if (choice1 == 3)
@@ -134,8 +134,8 @@ void Read_File()
 	string products_content((istreambuf_iterator<char>(productFile)), istreambuf_iterator<char>());
 	json_productFile = nlohmann::json::parse(products_content);
 
-	product p;
 	for (auto json_product = json_productFile.begin(); json_product != json_productFile.end(); ++json_product) {
+		product p;
 		p.id = (*json_product)["id"];
 		p.name = (*json_product)["name"];
 		p.category = (*json_product)["category"];
@@ -187,7 +187,6 @@ void Write_File()
 			product_json["quantity"] = product->quantity;
 			product_json["ratings"] = product->ratings;
 			product_json["avg_rate"] = product->avg_rate;
-
 			cart_array.push_back(product_json);
 		}
 
@@ -213,10 +212,9 @@ void Write_File()
 	//created a json object to handle writing vectors like "cart" and "ratings" proberly.
 	nlohmann::json json_productFile;
 
-	//create a json object to serialize every product from stock
-	nlohmann::json product_json;
-
 	for (auto product = stock.begin(); product != stock.end(); ++product) {
+	//create a json object to serialize every product from stock	
+		nlohmann::json product_json;
 		product_json["id"] = product->second.id;
 		product_json["name"] = product->second.name;
 		product_json["category"] = product->second.category;

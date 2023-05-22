@@ -27,4 +27,3 @@ inline unordered_map<string, product> stock;
 //category lists
 inline vector< vector <product*> >category_vector;
 
-

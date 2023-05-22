@@ -27,7 +27,7 @@ void product::productMenu()
     int choice;
     while (true) {
         cout << endl << "\t\t-----------------------------------------------------------------------" << endl;
-        cout << "1. Add product\n2. View product\n3. Update product\n4. Remove product\n5. Log out" << endl;
+        cout << "1. Add product\n2. View products\n3. Update product\n4. Remove product\n5. Log out" << endl;
         cout << "Enter your choice: " << endl;
 
         cin >> choice;
@@ -44,12 +44,12 @@ void product::productMenu()
             break;
         case 4:
             int choice;
-            cout << "1) Decrease product quantity\n";
-            cout << "2) Remove product from stock\n";
+            cout << "1) Remove product from stock\n";
+            cout << "2) Decrease product quantity\n";
             cout << "Enter the choice:\n";
             cin >> choice;
 
-            if (choice == 1)
+            if (choice == 2)
             {
                 int qun;
                 cout << "enter the name of product: \n";
@@ -58,7 +58,7 @@ void product::productMenu()
                 cin >> qun;
                 removeProduct(nameToRemove, qun);
             }
-            else if (choice == 2) {
+            else if (choice == 1) {
                 cout << "Enter product name you want to remove:\n";
                 cin >> nameToRemove;
                 removeProduct(nameToRemove);
@@ -90,6 +90,7 @@ void product::addProduct()
     cout << "Enter product quantity: ";
     cin >> newProduct.quantity;
 
+    //to get product category
     do {
         string choice;
         cout << "Available Categories: 1)Phones\t2)Electronics\t3)Fashion\t4)Others" << endl;
@@ -108,11 +109,11 @@ void product::addProduct()
             continue;
 
         break;
-    } while (true);
+    } while (true); 
 
     newProduct.sellerId = current_user->id;
 
-    stock[newProduct.name] = newProduct;
+    stock[newProduct.name] = newProduct; 
 
     system("cls"); //clear screan
     cout << "\t\t\t\tProduct added successfully!" << endl;
@@ -227,15 +228,12 @@ void product::removeProduct(string ProductName, int c)
         {
             it->second.quantity -= c;
 
-
         }
         else
         {
             cout << "No available quantity in stock\n";
         }
 
-        //print the current quantity
-        cout << "\t\t\t\t" << ProductName << " new quantity : " << it->second.quantity << endl;
 
     }
     else {
@@ -253,10 +251,10 @@ void product::make_categories()
     User u;
 
     //we first clear category lists so it doesn't duplicate data 
-    category_vector[0].clear();
-    category_vector[1].clear();
-    category_vector[2].clear();
-    category_vector[3].clear();
+    category_vector[0].clear(); //phones {iphone, galaxy, lenovo}
+    category_vector[1].clear(); //electronics
+    category_vector[2].clear(); //fashion
+    category_vector[3].clear(); //others
 
     for (auto it = stock.begin(); it != stock.end(); ++it) {
 
@@ -278,24 +276,6 @@ void product::make_categories()
         }
 
     }
-
-    // cout << "[Phones]:" << endl;
-    // for (int i = 0; i < phones.size(); i++) {
-    //     cout << phones[i]->name << endl;
-    // }
-
-    // cout << endl << endl << endl << "[Electroins]:" << endl;
-    // for (int i = 0; i < electronics.size(); i++) {
-    //     cout << electronics[i]->name << endl;
-    // }
-    // cout << endl << endl << endl << "[Fashion]:" << endl;
-    // for (int i = 0; i < fashion.size(); i++) {
-    //     cout << fashion[i]->name << endl;
-    // }
-    // cout << endl << endl << endl << "[Others]:" << endl;
-    // for (int i = 0; i < others.size(); i++) {
-    //     cout << others[i]->name << endl;
-    // }
 
 
 }
@@ -332,7 +312,7 @@ void product::show_category()
             continue;
 
         for (int i = 0; i < category_vector[index].size(); i++) {
-            cout << i + 1 << ") Name: " << category_vector[index][i]->name << "\tAverage Rate: " << category_vector[index][i]->avg_rate << "\t\ttPrice: " << category_vector[index][i]->price << endl;
+            cout << i + 1 << ") Name: " << category_vector[index][i]->name << "\tAverage Rate: " << category_vector[index][i]->avg_rate << "\t\tPrice: " << category_vector[index][i]->price << endl;
         }
         cout << "\t\t\t\t--------------------------------------------------------" << endl;
         cout << "choose product from above:\n(press 0 to Sort by Avg. Customer Review)\n\n";

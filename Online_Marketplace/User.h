@@ -23,7 +23,7 @@ public:
 
 	void login(string type);
 	void admin();
-	void info(string type);
+	void selector_page(string type);
 	void showpersonaldata(User* u);
 	void regestir(string type);
 	void forgetpass();
