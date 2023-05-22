@@ -39,12 +39,12 @@ int main()
 
 		if (choice1 == 1)
 		{
-			u1.info("customer");
+			u1.selector_page("customer");
 			//	system("cls");
 		}
 		else if (choice1 == 2)
 		{
-			u1.info("seller");
+			u1.selector_page("seller");
 			//	system("cls");
 		}
 		else if (choice1 == 3)

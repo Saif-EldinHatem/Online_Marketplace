@@ -25,6 +25,7 @@ void User::regestir(string type)
 	cout << "Enter password:";
 	cin >> s.password;
 	cout << endl;
+
 	s.id = autoid;
 	//setting user type.
 	s.type = type;
@@ -52,7 +53,7 @@ void User::login(string type)
 	system("cls");
 
 
-	if (t.id != 0 || t.password != "admin") //reuglar user login
+	if (t.id != 0 || t.password != "admin") //check if not an admin
 	{
 		for (auto i = user_list.begin(); i != user_list.end(); i++)//checking input id from regestered ids
 		{
@@ -106,11 +107,12 @@ void User::admin()
 		cout << "All regestered ID's: \n";
 
 		for (auto it = user_list.begin(); it != user_list.end(); ++it) {
-			cout << "ID: " << it->id + 1 << "\t Type: " << it->type << endl;
+			cout << it->id + 1 << ") \t Type: " << it->type << endl;
 		}
 
 		cout << "\t\t------Choose the user you want from above(Or 0 to quit)------\n\n";
 		cin >> choice4;
+		system("cls");
 
 		if (choice4 == 0) {
 			return;
@@ -145,7 +147,7 @@ void User::admin()
 	return;
 }
 
-void User::info(string type)
+void User::selector_page(string type)
 {
 	char choice2;
 	cout << "press 1 to login: \n\n";
@@ -157,7 +159,6 @@ void User::info(string type)
 	cin >> choice2;
 
 
-	User uuu;
 	switch (choice2)
 	{
 	case '1':
@@ -181,7 +182,7 @@ void User::info(string type)
 	default:
 		system("cls");
 		cout << "\t\tplease enter choice from above choices." << endl;
-		info(type); // there might be an error.
+		selector_page(type); // there might be an error.
 
 	}
 }
@@ -363,7 +364,8 @@ void User::addToCart(product item)
 			cart_Item_ID = i;
 			break;
 		}
-	}
+	} 
+	
 
 	cout << "Available quantity in stock: " << item.quantity << endl << endl;
 	cout << "Enter quantity you want to add to cart: ";
@@ -378,6 +380,7 @@ void User::addToCart(product item)
 	//if item already exists sum new quantity to its already existing amount.
 	if (cart_Item_ID != -1) {
 		amount += current_user->cart[cart_Item_ID].quantity;
+		current_user->cart[cart_Item_ID].quantity = amount;
 	}
 
 	//check if entered quantity bigger than quantity in stock.
@@ -386,8 +389,7 @@ void User::addToCart(product item)
 		return;
 	}
 
-	//If product is new to cart
-	if (cart_Item_ID == -1) {
+	if (cart_Item_ID == -1) { //if product is new to cart.
 		prdct.id = item.id;
 		prdct.name = item.name;
 		prdct.category = item.category;
@@ -395,9 +397,6 @@ void User::addToCart(product item)
 		prdct.sellerId = item.sellerId;
 		prdct.quantity = amount;
 		current_user->cart.push_back(prdct);
-	}
-	else {
-		current_user->cart[cart_Item_ID].quantity = amount;
 	}
 
 
@@ -437,11 +436,11 @@ void User::updateCart(int index)
 			cout << "No enough quantity in stock" << endl << endl;
 			updateCart(index);
 		}
-		else {
+		else { //amount maybe is correct
 
 			current_user->cart[index].quantity = count;
 
-			if (current_user->cart[index].quantity == 0) {
+			if (current_user->cart[index].quantity == 0) { //if amount of product in cart is 0 then remove it from cart.
 				removeFromCart(index);
 				cout << "Item removed from cart!" << endl;
 				return;
@@ -471,6 +470,8 @@ void User::confirmBuying()
 		{
 			p.removeProduct(current_user->cart[i].name, current_user->cart[i].quantity);
 		}
+		
+		//empty cart.
 		current_user->cart.clear();
 	}
 	else if (answer == "n" || answer == "N" || answer == "no" || answer == "No") {
