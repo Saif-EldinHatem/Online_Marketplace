@@ -107,7 +107,7 @@ void User::admin()
 		cout << "All regestered ID's: \n";
 
 		for (auto it = user_list.begin(); it != user_list.end(); ++it) {
-			cout << it->id + 1 << ")\tType: " << it->type << "\t ID: " << it->id << endl;
+			cout << it->id + 1 << ")\tType: " << it->type << "User Name: " << it->name << endl;
 		}
 
 		cout << "\t\t------Choose the user you want from above(Or 0 to quit)------\n\n";
@@ -374,7 +374,7 @@ void User::addToCart(product item)
 	} 
 	
 
-	cout << "Available quan tity in stock: " << item.quantity << endl << endl;
+	cout << "Available quantity in stock: " << item.quantity << endl << endl;
 	cout << "Enter quantity you want to add to cart: ";
 	cin >> amount;
 	system("cls");
