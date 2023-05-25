@@ -374,7 +374,7 @@ void User::addToCart(product item)
 	} 
 	
 
-	cout << "Available quan tity in stock: " << item.quantity << endl << endl;
+	cout << "Available quantity in stock: " << item.quantity << endl << endl;
 	cout << "Enter quantity you want to add to cart: ";
 	cin >> amount;
 	system("cls");
