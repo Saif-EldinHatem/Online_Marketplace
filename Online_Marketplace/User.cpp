@@ -107,7 +107,7 @@ void User::admin()
 		cout << "All regestered ID's: \n";
 
 		for (auto it = user_list.begin(); it != user_list.end(); ++it) {
-			cout << it->id + 1 << ")\tType: " << it->type << "User Name: " << it->name << endl;
+			cout << it->id + 1 << ")\tType: " << it->type << "\tUsername: " << it->name << endl;
 		}
 
 		cout << "\t\t------Choose the user you want from above(Or 0 to quit)------\n\n";
