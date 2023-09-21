@@ -1,24 +1,24 @@
 # Online_Marketplace
 
--------------------------------------------------CLASSES------------------------------------------------
+#CLASSES:
 -Users
 -product
--------------------------------------------------Features-----------------------------------------------
+#Features:
 -sign up
 -login
 -Forgot password
 
-//admin
+#admin
 -view users
 -remove users
 
-//sellers
+#sellers
 -add products
 -update products
 -decrease quantites
 -remove products
 
-//buyers
+#buyers
 -search
 -view categories
 -view cart
